@@ -5,7 +5,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class UniqueIdGenerator {
 
-    // Starting EPOCH 2023-09-01 00:00:00 to gain 41 years of IDs
+    // Starting EPOCH 2023-09-01 00:00:00 to gain 41 years.
+    // The max year until this id repeats itself is after 2092-08-31 23:59:59
     public static final long START_EPOCH = 1697860800000L;
     // Machine Id across the datacenters
     public static final int MACHINE_BITS = 10;
@@ -28,24 +29,21 @@ public class UniqueIdGenerator {
      */
     public synchronized long generateUniqueId() {
         long snowflakeId = (System.currentTimeMillis() - START_EPOCH) << MACHINE_BITS + COUNTER_BITS;
-        System.out.println(Long.toBinaryString(snowflakeId));
         snowflakeId |= nodeId << COUNTER_BITS;
-        System.out.println(Long.toBinaryString(snowflakeId));
         snowflakeId |= counter.incrementAndGet() % counterMax;;
-        System.out.println(Long.toBinaryString(snowflakeId) + " ----- \n");
         return snowflakeId;
     }
 
     /**
      * Generate alphanumeric Base62 Id given a long unique Id.
-     * Id character set  [0-9][A-Z][a-z].
+     * Id character set  [a-z][A-Z][0-9].
      * The length of the Id depends on the size of the input identifier.
      * 16-digit Snowflake Id will generate 9 character long character
      * @param uniqueId long
      * @return Base62 Alphanumeric Id
      */
     public String generateShortURLId(long uniqueId) {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder(); // default capacity 16
         while (uniqueId > 0) {
             int remainder = (int) (uniqueId % BASE62);
             System.out.println(uniqueId + " " + remainder + " " + ALPHABET.charAt(remainder));
