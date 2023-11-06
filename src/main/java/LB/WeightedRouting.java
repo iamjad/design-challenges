@@ -1,8 +1,8 @@
-package org.designchallenge;
+package LB;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class WeightedRoutingLB {
+public class WeightedRouting {
 
     public static int TRAFFIC_DISTRIBUTION = 10; // 10% of the traffic
     private AtomicInteger trafficDistributionCounter = new AtomicInteger(0); // 10% of the traffic

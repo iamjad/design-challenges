@@ -1,4 +1,4 @@
-package org.designchallenge;
+package uniqueIdentifier;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
