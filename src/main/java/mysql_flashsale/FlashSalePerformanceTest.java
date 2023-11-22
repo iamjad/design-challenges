@@ -8,8 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-public class QueryPerformanceTest {
-    private static final Logger logger = LoggerFactory.getLogger(QueryPerformanceTest.class);
+public class FlashSalePerformanceTest {
+    private static final Logger logger = LoggerFactory.getLogger(FlashSalePerformanceTest.class);
 
     public static void main(String[] args) {
         // Retrieve database connection details from environment variables
